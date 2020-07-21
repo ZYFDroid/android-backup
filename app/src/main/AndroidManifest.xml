@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zyfdroid.filebackup">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="换机"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name="com.zyfdroid.backupfileclient.MainActivity" android:label="换机客户端" android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.zyfdroid.backupfileclient.PerformActivity"
+            android:screenOrientation="portrait"
+            android:label="下载界面"
+            android:configChanges="orientation|keyboard|screenLayout|screenSize|density|uiMode|layoutDirection|locale" />
+
+        <activity android:name="com.zyfdroid.backupfileserver.MainActivity" android:label="换机服务端" android:screenOrientation="portrait" android:configChanges="orientation|keyboard|screenLayout|screenSize|density|colorMode|uiMode|layoutDirection|locale">
+        </activity>
+    </application>
+
+</manifest>
