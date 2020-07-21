@@ -1,4 +1,4 @@
-默认的添加/过滤规则
+﻿默认的添加/过滤规则
 只有以+或-开头的行才有效
 （也就是说你可以写注释）
 "+"代表无论如何也要添加，即使在白名单
@@ -12,6 +12,7 @@
 +/sdcard/Android/data/tv.danmaku.bili/
 
 -/sdcard/.
+-/sdcard/DCIM/thumbnail
 
 Aide党不需要传的东西
 +/sdcard/.aide/
