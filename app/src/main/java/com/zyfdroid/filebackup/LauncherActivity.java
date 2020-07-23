@@ -48,12 +48,10 @@ public class LauncherActivity extends Activity {
 
     public void startServer(View view) {
         startActivity(new Intent(this, com.zyfdroid.backupfileserver.MainActivity.class));
-        finish();
     }
 
     public void startClient(View view) {
         startActivity(new Intent(this, com.zyfdroid.backupfileclient.MainActivity.class));
-        finish();
     }
 
     public void showTips(View view) {

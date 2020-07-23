@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
             bfs.start();
             pwl = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"backup_server_require_wakeup");
             pwl.acquire();
-            tv.setText("服务器正在运行 http://localhost:54081/\n\n本机IP地址: \r\n"+getLocalIPAddress());
+            tv.setText(" · 服务器正在运行 http://IP地址:54081/\n\n · 本机可用IP地址: \r\n"+getLocalIPAddress()+"\r\n\r\n · 请将手机接通电源并置于散热良好的环境中\r\n\r\n · 新手机可以打开浏览器输入 http://IP地址:54081/getapp 下载应用");
         } catch (IOException e) {
             e.printStackTrace();
             tv.setText("服务器端启动失败，可能有程序占用了54081端口: \n"+e.toString());
@@ -143,8 +143,18 @@ class BackupFileServer extends NanoHTTPD{
 			}
 			File f=new File(packages.get(pkgname));
 			try {
-				return newFixedLengthResponse(Response.Status.OK, "application/vnd.android.package-archive", new FileInputStream(f), f.length());
+				Response resp = newFixedLengthResponse(Response.Status.OK, "application/vnd.android.package-archive", new FileInputStream(f), f.length());
+                resp.addHeader("Content-Disposition","attachment;filename="+pkgname+".apk");
+                return resp;
 			} catch (FileNotFoundException e) {}
+        }
+        if(uri.equals("/")){
+            return newFixedLengthResponse(Response.Status.OK,"text/plain","这里没有彩蛋。");
+        }
+        if(uri.equals("/getapp")){
+            Response resp = newFixedLengthResponse(Response.Status.TEMPORARY_REDIRECT,"text/plain","");
+            resp.addHeader("Location","app/"+ctx.getPackageName());
+            return resp;
         }
         return super.serve(session);
     }

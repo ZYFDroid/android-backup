@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class PerformActivity extends Activity {
         passedbyItems = null;
         return items;
     }
-
+    PowerManager.WakeLock pwl;
     Handler hWnd = new Handler();
     ConcurrentLinkedQueue<FileEntry> smallQueue = new ConcurrentLinkedQueue<>();
     ConcurrentLinkedQueue<FileEntry> mediumQueue = new ConcurrentLinkedQueue<>();
@@ -137,6 +138,7 @@ public class PerformActivity extends Activity {
         new PDD<Void>(this) {
             @Override
             public Void runWorkAsync() throws Exception {
+                Collections.shuffle(items);
                 for (int i = 0; i < items.size(); i++) {
                     FileEntry fe = items.get(i);
                     if(fe.size > FILESIZE_LARGE_THREHOLD){
@@ -158,6 +160,8 @@ public class PerformActivity extends Activity {
             }
         }.execute();
         hWnd.postDelayed(reportProgressRunner,500);
+        pwl = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"backup_server_require_wakeup");
+        pwl.acquire();
     }
 
     public void notifyStop(){
@@ -363,6 +367,13 @@ public class PerformActivity extends Activity {
             ex.printStackTrace();
         }
         return result;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pwl.release();
     }
 }
 

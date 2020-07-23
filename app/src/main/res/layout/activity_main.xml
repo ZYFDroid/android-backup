@@ -1,57 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    tools:context="com.zyfdroid.backupfileclient.MainActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.zyfdroid.backupfileclient.MainActivity">
-    <LinearLayout
+    android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="添加/过滤规则\n只有以+或-开头的行才有效\n'+'代表无论如何也要添加，即使在白名单\n'-'代表忽略\n如果以*开头代表匹配后缀。\n\n本机已有的文件会被覆盖，软件安装包会放在/sdcard/换机客户端/app里面。通讯录，短信，微信聊天记录需要自己搬" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="IP地址："/>
-
-        <EditText
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:id="@+id/txtIp"
-            android:text="192.168.43.1"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加/过滤规则\n只有以+或-开头的行才有效\n'+'代表无论如何也要添加，即使在白名单\n'-'代表忽略\n如果以*开头代表匹配后缀。\n\n本机已有的文件会被覆盖，软件安装包会放在/sdcard/换机客户端/app里面。通讯录，短信，微信聊天记录需要自己搬" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="规则："/>
-        <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top|left"
-        android:inputType="textMultiLine"
-        android:hint=""
-        android:minLines="10"
-        android:id="@+id/txtAllowBlockList"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IP地址："/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/txtIp"
+                android:text="192.168.43.1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="规则："/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:hint=""
+                android:minLines="10"
+                android:id="@+id/txtAllowBlockList"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onResetConf"
+                android:text="恢复默认配置"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:onClick="onPreview"
-        android:text="预览文件列表"/>
-    </LinearLayout>
-</ScrollView>
+        android:background="@drawable/bg_fab"
+        android:elevation="5dp"
+        android:src="@drawable/ic_send"
+        android:tint="#fff"
+        android:scaleType="fitCenter"
+        android:padding="12dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="40dp"/>
+
+</FrameLayout>

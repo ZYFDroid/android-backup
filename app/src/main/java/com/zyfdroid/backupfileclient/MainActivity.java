@@ -102,4 +102,13 @@ public class MainActivity extends Activity {
         });
         ff.filterFile(getViewText(R.id.txtIp));
     }
+
+    public void onResetConf(View view) {
+        new AlertDialog.Builder(this).setTitle("恢复默认配置文件?").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                setViewText(R.id.txtAllowBlockList,readAssetsTxt(MainActivity.this,"default_rule.txt"));
+            }
+        }).setNegativeButton(android.R.string.cancel,null).create().show();
+    }
 }
